@@ -25,6 +25,12 @@ namespace MarsFramework.Global
         #region reports
         public static ExtentTest test;
         public static ExtentReports extent;
+        public static void ExtentReports()
+        {
+            Console.WriteLine("ReportPath " + ReportPath);
+            extent = new ExtentReports(ReportPath, false, DisplayOrder.NewestFirst);
+            extent.LoadConfig(MarsResource.ReportXMLPath);
+        }
         #endregion
 
         #region setup and tear down
@@ -70,12 +76,15 @@ namespace MarsFramework.Global
         public void TearDown()
         {
             // Screenshot
-            String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinitions.driver, "Report");//AddScreenCapture(@"E:\Dropbox\VisualStudio\Projects\Beehive\TestReports\ScreenShots\");
-            // test.Log(LogStatus.Info, "Image example: " + img);
-            // end test. (Reports)
-            //extent.EndTest(test);
+            Console.WriteLine("Base.ScreenshotPath" + Base.ScreenshotPath);
+            String img = SaveScreenShotClass.SaveScreenshot(driver, "Report");
+            test.Log(LogStatus.Info, "Snapshot below: " + test.AddScreenCapture(img));
+
+            //end test. (Reports)
+            //extent.RemoveTest(test);
+            extent.EndTest(test);
             // calling Flush writes everything to the log file (Reports)
-            //extent.Flush();
+            extent.Flush();
             // Close the driver :)            
             GlobalDefinitions.driver.Close();
             GlobalDefinitions.driver.Quit();

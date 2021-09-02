@@ -135,12 +135,12 @@
     <comment>If true Login, else Register</comment>
   </data>
   <data name="ReportPath" xml:space="preserve">
-    <value>/TestReports/Screenshots</value>
+    <value>/TestReports/ExtentReports/MarsReports.html</value>
   </data>
   <data name="ReportXMLPath" xml:space="preserve">
-    <value>/TestReports/ExtentReports 2.0_files</value>
+    <value>/TestReports/ExtentReports/ReportXML.XML</value>
   </data>
   <data name="ScreenShotPath" xml:space="preserve">
-    <value>/TestReports/Screenshots</value>
+    <value>/TestReports/Screenshots/</value>
   </data>
 </root>

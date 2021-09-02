@@ -55,9 +55,12 @@ namespace MarsFramework.Pages
         internal void EditShareSkillFromListings()
         {
 
+            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.LinkText("Manage Listings"), 30);
+
             manageListingsLink.Click();
 
-            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.XPath("//tbody/tr[1]/td[8]/div[1]/button[2]/i[1]"), 8);
+            // wait for edit pen mark element
+            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.XPath("//tbody/tr[1]/td[8]/div[1]/button[2]/i[1]"), 15);
 
             // Click pen mark
             edit.Click();           
@@ -65,16 +68,16 @@ namespace MarsFramework.Pages
             // Call ShareSkill
             ShareSkill ShareSkillObj = new ShareSkill();
             ShareSkillObj.EditShareSkill();
-
-
         }
 
 
         internal void DeleteShareSkillFromListings()
         {
+            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.LinkText("Manage Listings"), 30);
+
             manageListingsLink.Click();
 
-            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.XPath("//tbody/tr[1]/td[8]/div[1]/button[3]/i[1]"), 5);
+            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.XPath("//tbody/tr[1]/td[8]/div[1]/button[3]/i[1]"), 30);
 
             //Populate the Excel Sheet
             GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ManagelistingsExcelPath, "ManageListings");

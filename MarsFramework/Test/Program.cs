@@ -2,9 +2,11 @@
 using MarsFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using RelevantCodes.ExtentReports;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using static MarsFramework.Global.GlobalDefinitions;
 
 namespace MarsFramework
 {
@@ -15,11 +17,19 @@ namespace MarsFramework
         class User : Global.Base
         {
 
-            [Test]
-            public void Test()
+            [Test, Order(1)]
+            [Obsolete]
+            public void Test_CreateShareSkill()
             {
-                // create service detials
-                GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.LinkText("Share Skill"), 10);
+
+                //Start the Reports
+                ExtentReports();
+                test = extent.StartTest("Create ShareSkill");
+                test.Log(LogStatus.Info, "ShareSkills");
+                //taking Screenshots of adding skills
+                SaveScreenShotClass.SaveScreenshot(driver, "ShareSkill");
+
+                // create service detials                
                 ShareSkill ShareSkillObj = new ShareSkill();
                 ShareSkillObj.EnterShareSkill();
 
@@ -27,21 +37,57 @@ namespace MarsFramework
                 ManageListings manageListingsObj = new ManageListings();
                 manageListingsObj.Listings();
 
-
-
                 // assert create share skill
                 AssertListings(Base.ShareSkillExcelPath, "ShareSkill");
 
+
+
+            }
+
+            [Test, Order(2)]
+            [Obsolete]
+            public void Test_EditShareSkill()
+            {
+
+                //Start the Reports
+                ExtentReports();
+                test = extent.StartTest("Edit ShareSkill");
+                test.Log(LogStatus.Info, "ShareSkills");
+                //taking Screenshots of adding skills
+                SaveScreenShotClass.SaveScreenshot(driver, "ShareSkill");
+
                 // update services details
+                // listings
+                
+                ManageListings manageListingsObj = new ManageListings();               
                 manageListingsObj.EditShareSkillFromListings();
 
                 // assert update share skill
                 manageListingsObj.Listings();
                 AssertListings(Base.ShareSkillExcelPath, "UpdateShareSkill");
 
+
+
+            }
+
+            [Test, Order(3)]
+            [Obsolete]
+            public void Test_DeleteShareSkill()
+            {
+
+                //Start the Reports
+                ExtentReports();
+                test = extent.StartTest("Delete ShareSkill");
+                test.Log(LogStatus.Info, "ShareSkills");
+                //taking Screenshots of adding skills
+                SaveScreenShotClass.SaveScreenshot(driver, "ShareSkill");
+
+                // listings
+                ManageListings manageListingsObj = new ManageListings();
                 manageListingsObj.DeleteShareSkillFromListings();
 
                 // Assert for no listing message after delete
+                manageListingsObj.Listings();
                 AssertDelete();
 
             }

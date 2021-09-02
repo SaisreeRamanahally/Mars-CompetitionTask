@@ -178,6 +178,8 @@ namespace MarsFramework.Pages
 
         internal void EnterShareSkill()
         {
+            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.LinkText("Share Skill"), 30);
+
             //Populate the excel data
             GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ShareSkillExcelPath, "ShareSkill");
 
@@ -303,7 +305,7 @@ namespace MarsFramework.Pages
             //Assertion
 
             //find xpath for sucess or failure message
-            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.XPath("//div[@class='ns-box-inner']"), 8);
+            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.XPath("//div[@class='ns-box-inner']"), 10);
             var alerttext = SucessOrFailure.Text;
 
             // assert expected result = actual result
@@ -314,10 +316,12 @@ namespace MarsFramework.Pages
         internal void EditShareSkill()
         {
 
+
             //Populate the Excel Sheet
             GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ShareSkillExcelPath, "UpdateShareSkill");
 
             //Update the Title in textbox
+            GlobalDefinitions.WaitForElement(Global.GlobalDefinitions.driver, By.Name("title"), 30);
             Title.Clear();
             Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Title"));
             GlobalDefinitions.wait(5);
